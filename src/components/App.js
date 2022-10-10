@@ -1,17 +1,25 @@
 import styled from "styled-components";
 import GlobalStyle from "../assets/GlobalStyle";
 import Header from "../components/Header"
-import Main from "./Main";
+import Firstpage from "./FirstPage";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Sessoes from "./Sessoes";
+import Seats from "./Seats";
 
-export default function App(){
-    return(
-        <>
+export default function App() {
+    return (
+        <BrowserRouter>
             <ScreenContainer>
-                <GlobalStyle/>
-                <Header/>
-                <Main />
+                <GlobalStyle />
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Firstpage />} />
+                    <Route path="/sessoes/:idFilme" element={<Sessoes/>}/>
+                    <Route path="/assentos/:idSessao" element={<Seats/>}/>
+                </Routes>
+
             </ScreenContainer>
-        </>
+        </BrowserRouter>
     )
 }
 
@@ -47,35 +55,3 @@ const ScreenContainer = styled.div`
 
 // `
 
-// CSS da segunda tela do figma!!
-
-/* <SessaoContainer>
-<h6>
-    Quinta-feira - 24/06/2021   
-</h6>
-<button>
-    15:00
-</button>
-</SessaoContainer> */
-
-// const SessaoContainer = styled.div`
-//     padding: 0 30px 0 30px;
-//     align-items: flex-start;
-//     justify-content: flex-start;
-//     h6{
-//         font-size: 20px;
-//         font-weight: 400;
-//         color: #293845;
-//         padding: 20px 0;
-//     }
-//     button{
-//         color: white;
-//         background-color: #E8833A;
-//         font-size: 18px;
-//         font-weight: 400;
-//         border: none;
-//         border-radius: 3px;
-//         width: 80px;
-//         height: 40px;
-//     }
-// `

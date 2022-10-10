@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import {Link } from "react-router-dom"
 
 export default function Film() {
 
@@ -10,11 +10,10 @@ export default function Film() {
     useEffect(
         () => {
 
-            const URL = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
+            const URL = "https://mock-api.driven.com.br/api/v5/cineflex/movies"
             const promise = axios.get(URL)
 
             promise.then((res) => {
-                console.log(res.data)
                 setMovies(res.data)
             })
 
@@ -36,11 +35,13 @@ export default function Film() {
 }
 
 function OneFilm(movie) {
-    console.log(movie.movie)
     return (
-                <ContainerMovie>
-                    <img src={movie.movie.posterURL} alt="Poster Filme"></img>
-                </ContainerMovie>
+        
+        <ContainerMovie>
+            <Link to = {`/sessoes/${movie.movie.id}`}>
+                <img src={movie.movie.posterURL} alt="Poster Filme"></img>
+            </Link>    
+        </ContainerMovie>
     )
 }
 
