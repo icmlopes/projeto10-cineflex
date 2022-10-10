@@ -20,7 +20,6 @@ height: 100%;
 justify-content: space-evenly;
 display: flex;
 flex-wrap: wrap;
-
 `
 const Direcionamento = styled.div`
     margin-top: 50px;

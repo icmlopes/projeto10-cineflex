@@ -15,7 +15,6 @@ export default function Sessoes() {
         const promise = axios.get(`https://mock-api.driven.com.br/api/v5/cineflex/movies/${idFilme}/showtimes`)
     
         promise.then((res) => {
-            console.log(res.data.days)
             setDay(res.data.days)
         })  
 
@@ -46,7 +45,7 @@ function SelectSession(value){
             </SessaoContainerDay>
             <SessaoContainerHour>
                 {value.value.showtimes.map((showtime, index) =>
-                <Link to = {`/assentos/${showtime.id}`} key={index}>
+                <Link to = {`/assentos/${showtime.id}`}>
                     <button key={index}> 
                         {showtime.name}
                     </button>

@@ -82,7 +82,8 @@ align-items: center;
 justify-content: center;
 display: flex;
 margin-right: 30px;
-
+padding-right: 5px;
+padding-left: 5px;
 img{
     width: 48px;
     height: 72px;

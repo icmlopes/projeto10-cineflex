@@ -32,26 +32,5 @@ const ScreenContainer = styled.div`
     margin: 0 auto;
 `
 
-// const SelectSeat = styled.div`
-//     padding: 0 30px 0 30px;
-//     display: flex;
-//     flex-wrap:wrap;
-//     justify-content: space-evenly;
-//     button{
-//         width: 26px;
-//         height: 26px;
-//         border-radius: 100px;
-//         background-color: #C3CFD9;
-//         border: 1px solid #808F9D;
-//         margin-top:5px;
-//         font-size: 11px;
-//         font-weight: 400;
-//         color: #000000;
-//     }
-// `
-// const ContainerStatus =styled.div`
-//     justify-content: space-between;
-//     padding: 20px 30px 20px 30px;
 
-// `
 
