@@ -8,6 +8,9 @@ export default function Seats(){
 
     const [banch, setBanch] = useState([])
     const {idSessao} = useParams();
+    const indisponivel = '#FBE192';
+    const disponivel = '#C3CFD9';
+    const selecionado = '#1AAE9E';
     
 
     useEffect(() => {
@@ -38,9 +41,9 @@ export default function Seats(){
                 )}
             </ContainerAssentos>
             <Container>
-                <ContainerStatusSeat></ContainerStatusSeat>
-                <ContainerStatusSeat></ContainerStatusSeat>
-                <ContainerStatusSeat></ContainerStatusSeat>
+                <ContainerStatusSeat cor={selecionado}/>
+                <ContainerStatusSeat cor={disponivel}/>
+                <ContainerStatusSeat cor={indisponivel}/>
             </Container>
             <ContainerStatus>
                 <p>Selecionado</p>
@@ -92,7 +95,7 @@ const Container =styled.div`
     margin-top: 20px;
 `
 const ContainerStatusSeat =styled.div`
-    background-color: black;
+    background-color: ${props => props.cor};
     width: 26px;
     height: 26px;
     border-radius: 100px;
