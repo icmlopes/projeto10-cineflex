@@ -1,23 +1,35 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components"
 import { useForm } from "../../components/useForm"
 
 
-export default function BuySeat({ selectedSeat }) {
+export default function BuySeat({ selectedSeat, name, setName, CPF, setCPF }) {
 
 
     console.log(selectedSeat)
-    // const [form, handleForm] = useForm({ name: "", CPF: "" })
-
-
+    // const [form, handleForm] = useForm({ name: "", CPF: "" });
+    
+    const navigate = useNavigate()
+    
     function reservedSeats(e) {
         e.preventDefault();
 
+        const ids = selectedSeat.map((seat) => (seat.id))
+     
+        const body = {
+            ids,
+            name,
+            cpf: CPF
+        }
+
         const URL = "https://mock-api.driven.com.br/api/v5/cineflex/seats/book-many"
-        const promise = axios.post(URL) //form)
+        const promise = axios.post(URL, body)
 
         promise.then(res => {
             console.log(res.data)
+            console.log("Foi enviado")
+            navigate("/sucesso")
         })
 
         promise.catch((err) => {
@@ -30,20 +42,20 @@ export default function BuySeat({ selectedSeat }) {
             <ContainerForm onSubmit={reservedSeats}>
                 <p>Nome do comprador</p>
                 <input
-                    type="text"
+                    type="text" required
                     placeholder="Digite seu nome..."
                     name="name"
-                // value={(form.name)}
-                // onChange={handleForm}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
                 />
 
                 <p>CPF do comprador</p>
                 <input
-                    type="text"
+                    type="text" required
                     placeholder="Digite seu CPF..."
                     name="CPF"
-                // value={(form.CPF)}
-                // onChange={handleForm}
+                    value={CPF}
+                    onChange={(e) => setCPF(e.target.value)}
                 />
                 <ContainerButton>
                     <Button>
@@ -59,7 +71,7 @@ const ContainerBuyer = styled.div`
 padding: 20px;
 `
 
-const ContainerForm = styled.div`
+const ContainerForm = styled.form`
 input{
     width:95%;
     height: 51px;

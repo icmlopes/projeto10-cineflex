@@ -5,17 +5,13 @@ import styled from "styled-components"
 import BuySeat from "./BuySeat"
 
 
-export default function Seats() {
+export default function Seats({selectedSeat, setSelectedSeat, name, setName, CPF, setCPF, film, setFilm, dates, setDates, hour,setHour}) {
 
     const [banches, setbanches] = useState([])
     const { idSessao } = useParams();
-    const [film, setFilm] = useState([])
-    const [dates, setDates] = useState([])
-    const [hour,setHour] = useState([])
     const indisponivel = {background: '#FBE192', border: "#F7C52B"};
     const disponivel = {background:'#C3CFD9', border: "#7B8B99"};
     const selecionado = {background: '#1AAE9E', border: "#0E7D71"};
-    const [selectedSeat, setSelectedSeat] = useState([])
 
 
     useEffect(() => {
@@ -27,7 +23,10 @@ export default function Seats() {
             setFilm(res.data.movie)
             setDates(res.data.day)
             setHour(res.data)
+            
         })
+
+        
 
         promise.catch((err) => {
             console.log(err.response.data)
@@ -41,7 +40,7 @@ export default function Seats() {
             alert("Esse acento não está disponível")
         }
         else {
-            const wasClicked = selectedSeat.includes(s.id)
+            const wasClicked = selectedSeat.some((seat) => seat.id === s.id)
             if (wasClicked === true) {
                 console.log(s)
                 console.log(selectedSeat)
@@ -54,12 +53,13 @@ export default function Seats() {
             }
             
             else {
-                setSelectedSeat([...selectedSeat, s.id]);
+                setSelectedSeat([...selectedSeat, s]);
             }
             return;
         }
     }
 
+    // console.log(selectedSeat)
 
 
     return (
@@ -70,11 +70,11 @@ export default function Seats() {
                 <ContainerAssentos>
                     {banches.map((b) =>
                         <SelectSeat 
-                        selectedSeat={selectedSeat}
                         key={b.id} 
                         onClick={() => handleSeat(b)}
                         available = {b.isAvailable}
-                        isSelected = {selectedSeat.includes((seat) => seat.id === b.id)}
+                        isSelected = {selectedSeat.some((seat) => seat.id === b.id)}
+                        film={film}
                         >
                             <button type="button">
                                 {b.name}
@@ -96,7 +96,13 @@ export default function Seats() {
                 <p>Disponível</p>
                 <p>Indisponível</p>
             </ContainerStatus>
-            <BuySeat />
+            <BuySeat 
+            selectedSeat = {selectedSeat}
+            name={name}
+            setName={setName}
+            CPF= {CPF}
+            setCPF={setCPF}
+            />
             <ContainerFooter>
                 <ContainerChoice>
                     <MovieChoice>
@@ -145,7 +151,7 @@ const SelectSeat = styled.div`
         width: 26px;
         height: 26px;
         border-radius: 100px;
-        background-color: ${({available, isSelected}) => available === false ?  "#FBE192" : isSelected === true ? "green" : "#C3CFD9" };
+        background-color: ${({available, isSelected}) => available === false ?  "#FBE192" : isSelected === true ? "#1AAE9E" : "#C3CFD9" };
         border: 1px solid;
         border-color: ${({available}) => available === false ?  "#F7C52B" : "#7B8B99" };
         margin-top:5px;
