@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import GlobalStyle from "../assets/GlobalStyle";
-import Header from "../components/Header"
-import Firstpage from "./FirstPage";
+import GlobalStyle from "./assets/GlobalStyle";
+import Header from "./components/Header"
+import Firstpage from "./Pages/FirstPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Sessoes from "./Sessoes";
-import Seats from "./Seats";
+import Sessoes from "./Pages/Sessoes";
+import Seats from "./Pages/Seats/Seats";
+
 
 export default function App() {
     return (
@@ -12,12 +13,11 @@ export default function App() {
             <ScreenContainer>
                 <GlobalStyle />
                 <Header />
-                <Routes>
-                    <Route path="/" element={<Firstpage />} />
-                    <Route path="/sessoes/:idFilme" element={<Sessoes/>}/>
-                    <Route path="/assentos/:idSessao" element={<Seats/>}/>
-                </Routes>
-
+                    <Routes>
+                        <Route path="/" element={<Firstpage />} />
+                        <Route path="/sessoes/:idFilme" element={<Sessoes />} />
+                        <Route path="/assentos/:idSessao" element={<Seats />} />
+                    </Routes>
             </ScreenContainer>
         </BrowserRouter>
     )

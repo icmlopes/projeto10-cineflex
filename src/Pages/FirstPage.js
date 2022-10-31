@@ -1,4 +1,4 @@
-import Film from "./Film"
+import Film from "../components/Film"
 import styled from "styled-components";
 
 
